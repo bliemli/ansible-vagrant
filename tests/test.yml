@@ -1,0 +1,12 @@
+---
+- name: apply vagrant role
+  hosts: localhost
+  become: yes
+  become_method: sudo
+
+  vars:
+    provider_libvirt: true
+
+  roles:
+  - role: ansible-vagrant
+

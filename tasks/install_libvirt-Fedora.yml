@@ -1,0 +1,17 @@
+---
+  - name: install libvirt provider packages
+    dnf: name={{ item }} state=present
+    with_items:
+    - vagrant-libvirt
+    - vagrant-libvirt-doc
+
+  - name: get vagrant-libvirt version
+    shell: $(which dnf) info installed vagrant-libvirt | awk '/Version/ {print $3}'
+    register: vagrant_libvirt_version_result
+    changed_when: false
+
+  - set_fact: vagrant_libvirt_version={{ vagrant_libvirt_version_result.stdout }}
+
+  - name: allow vagrant group to manage libvirt
+    copy: src=/usr/share/vagrant/gems/doc/vagrant-libvirt-{{ vagrant_libvirt_version }}/polkit/10-vagrant-libvirt.rules dest=/usr/share/polkit-1/rules.d/
+

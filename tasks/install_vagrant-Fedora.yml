@@ -1,0 +1,55 @@
+---
+- name: install required packages for ansible modules
+  raw: dnf install --assumeyes python2 python2-dnf libselinux-python
+
+- name: install vagrant
+  dnf: name=vagrant state=present
+
+- include: install_libvirt-Fedora.yml
+  when: provider_libvirt
+
+#  - name: 
+#    unless: vagrant box list
+
+#  - name: install lxc provider package
+#    dnf: name=vagrant-lxc state=present
+#    when: vagrant_provider.lxc
+
+
+#- name: open up firewalld for nfs service
+#  firewalld: service={{ item }} permanent=true state=enabled immediate=true
+#  with_items:
+#    - nfs
+#    - rpc-bind
+#    - mountd
+
+#- name: open up firewalld ports for nfs
+#  firewalld: port={{ item }} permanent=true state=enabled immediate=true
+#  with_items:
+#    - 2049/udp
+    
+#- name: install system group
+#  group: name=vagrant state=present
+
+#- name: write sudoers.d
+#  template: src=sudoers.j2 dest=/etc/sudoers.d/vagrant mode=0755 validate='visudo -cf %s'
+
+#- name: install vagrant package
+#  yum:
+#    name=vagrant
+#    state=present
+#  changed_when: false
+#  when: ansible_distribution_major_version|int < 22
+
+#- name: install vagrant package
+#  dnf:
+#    name=vagrant
+#    state=present
+#  changed_when: false
+#  when: ansible_distribution_major_version|int >= 22
+
+
+#vagrant_provider:
+#  libvirt: true
+#  lxc: false
+
