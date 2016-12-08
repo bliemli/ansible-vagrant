@@ -1,2 +1,11 @@
 ---
-provider_libvirt: true
+vagrant_plugins:
+  lxc: false
+  libvirt: true
+  cachier: false
+  hostmanager: false
+  registration: true
+  sshfs: false
+  digitalocean: false
+  adbinfo: false
+
