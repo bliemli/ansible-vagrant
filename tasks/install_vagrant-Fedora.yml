@@ -1,6 +1,7 @@
 ---
 - name: install required packages for ansible modules
-  raw: dnf install --assumeyes python2 python2-dnf libselinux-python
+  raw: dnf install --quiet --assumeyes python2 python2-dnf libselinux-python
+  changed_when: false
 
 - name: install vagrant
   dnf: name=vagrant state=present
